@@ -15,6 +15,8 @@ public abstract class Cliente {
     private String nome;
     private String telCelular;
     private String telFixo;
+    private boolean whats;
+    private boolean sms;
     private HashMap<String, ContaCorrente> contas;
 
     public Cliente(String nome, String telCelular, String telFixo) {
@@ -59,4 +61,19 @@ public abstract class Cliente {
     }
 
 
+    public boolean isWhats() {
+        return whats;
+    }
+
+    public void setWhats(boolean whats) {
+        this.whats = whats;
+    }
+
+    public boolean isSms() {
+        return sms;
+    }
+
+    public void setSms(boolean sms) {
+        this.sms = sms;
+    }
 }

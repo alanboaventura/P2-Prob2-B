@@ -18,6 +18,8 @@ public class ContaCorrente {
     private Cliente cliente;
     private double saldo = 0;
     private List<Operacao> operacoes = new ArrayList();
+    private List<Observer> observers = new ArrayList<Observer>();
+    private List<String> metodosNot = new ArrayList<String>();
 
     public ContaCorrente(int numero, int agencia) {
         this.setNumero(numero);
@@ -35,12 +37,14 @@ public class ContaCorrente {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.SAIDA, new Date(), this);
         operacoes.add(oper);
         this.saldo -= valor;
+        notifyAllObservers();
     }
 
     public void depositar(double valor) {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this);
         operacoes.add(oper);
         this.saldo += valor;
+        notifyAllObservers();
     }
 
     public void transferir(double valor, ContaCorrente destino) {
@@ -51,12 +55,23 @@ public class ContaCorrente {
         Operacao oper = new OperacaoTransferencia(valor, this.getSaldo(), TipoOperacao.SAIDA, new Date(), this, destino);
         operacoes.add(oper);
         this.saldo -= valor;
+        notifyAllObservers();
     }
 
     private void receberTransferencia(double valor, ContaCorrente origem) {
         Operacao oper = new OperacaoTransferencia(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this, origem);
         operacoes.add(oper);
         this.saldo += valor;
+        notifyAllObservers();
+    }
+
+    public void add(Observer observer){
+        this.observers.add(observer);
+    }
+
+    public void notifyAllObservers(){
+        for (Observer observer : observers)
+            observer.update();
     }
 
     public int getNumero() {
@@ -90,5 +105,13 @@ public class ContaCorrente {
     @Override
     public String toString() {
         return this.getChave();
+    }
+
+    public List<String> getMetodosNot() {
+        return metodosNot;
+    }
+
+    public void setMetodosNot(List<String> metodosNot) {
+        this.metodosNot = metodosNot;
     }
 }
