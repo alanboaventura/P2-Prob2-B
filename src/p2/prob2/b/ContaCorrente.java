@@ -12,12 +12,19 @@ import java.util.List;
 /**
  * @author marcel
  */
+
 public class ContaCorrente {
     private int numero;
     private int agencia;
     private Cliente cliente;
     private double saldo = 0;
     private List<Operacao> operacoes = new ArrayList();
+    ArrayList<String> realizado = new ArrayList();
+    private byte methods = 0;
+    public static final byte SMS = 1;
+    public static final byte WHATSAPP = 2;
+    public static final byte JMS = 4;
+
 
     public ContaCorrente(int numero, int agencia) {
         this.setNumero(numero);
@@ -27,7 +34,8 @@ public class ContaCorrente {
     public String getChave() {
         return String.valueOf(agencia) + "-" + String.valueOf(numero);
     }
-
+    
+    //Alterado OK
     public void sacar(double valor) {
         if (valor > this.getSaldo()) {
             throw new IllegalArgumentException("Saldo insuficiente para o saque");
@@ -35,14 +43,21 @@ public class ContaCorrente {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.SAIDA, new Date(), this);
         operacoes.add(oper);
         this.saldo -= valor;
+        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Saque de " + 
+                      valor + " - " + TipoOperacao.SAIDA);
     }
 
+    //Alterado
     public void depositar(double valor) {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this);
         operacoes.add(oper);
         this.saldo += valor;
+        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Depósito de " + 
+                      valor + " - " + TipoOperacao.ENTRADA);
     }
 
+    
+    //Alterado
     public void transferir(double valor, ContaCorrente destino) {
         if (valor > this.getSaldo()) {
             throw new IllegalArgumentException("Saldo insuficiente para transferência");
@@ -51,12 +66,23 @@ public class ContaCorrente {
         Operacao oper = new OperacaoTransferencia(valor, this.getSaldo(), TipoOperacao.SAIDA, new Date(), this, destino);
         operacoes.add(oper);
         this.saldo -= valor;
+        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Transferencia de " + 
+                      valor + " para a Conta " + destino + " - " + TipoOperacao.SAIDA);
     }
 
+    //Alterado
     private void receberTransferencia(double valor, ContaCorrente origem) {
         Operacao oper = new OperacaoTransferencia(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this, origem);
         operacoes.add(oper);
         this.saldo += valor;
+        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Transferencia recebida de " + 
+                      origem + " no valor de " + valor + " - " + TipoOperacao.ENTRADA);
+    }
+
+    public int setNotifyMethods(byte methods){
+        if((this.cliente instanceof ClientePessoaFisica) && (methods & JMS) == JMS) return -1;
+        this.methods = methods;
+        return 0;
     }
 
     public int getNumero() {
