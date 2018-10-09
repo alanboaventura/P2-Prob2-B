@@ -4,38 +4,33 @@ package p2.prob2.b;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-/*
- * Esta classe oferece as funcionalidades básicas para atender ao Problema 2.
- */
+import java.util.Observable;
 
 /**
+ * Esta classe oferece as funcionalidades básicas para atender ao Problema 2.
+ *
  * @author marcel
  */
+public class ContaCorrente extends Observable {
 
-public class ContaCorrente {
     private int numero;
     private int agencia;
     private Cliente cliente;
     private double saldo = 0;
     private List<Operacao> operacoes = new ArrayList();
-    ArrayList<String> realizado = new ArrayList();
-    private byte methods = 0;
-    public static final byte SMS = 1;
-    public static final byte WHATSAPP = 2;
-    public static final byte JMS = 4;
+    private ArrayList<String> realizados = new ArrayList();
+    private ServicosContaCorrente servicosContaCorrente;
 
-
-    public ContaCorrente(int numero, int agencia) {
-        this.setNumero(numero);
-        this.setAgencia(agencia);
+    public ContaCorrente(Cliente cliente, int numero, int agencia, boolean possuiBaixaDeInvestimento, boolean possuiFluxoDeCaixa, boolean possuiNotificacoesEmOperacoes, boolean aceitaSms, boolean aceitaWhatsapp, boolean aceitaJms) {
+        this.servicosContaCorrente = new ServicosContaCorrente(cliente, possuiBaixaDeInvestimento, possuiFluxoDeCaixa, possuiNotificacoesEmOperacoes, aceitaSms, aceitaWhatsapp, aceitaJms);
+        this.numero = numero;
+        this.agencia = agencia;
     }
 
     public String getChave() {
         return String.valueOf(agencia) + "-" + String.valueOf(numero);
     }
-    
-    //Alterado OK
+
     public void sacar(double valor) {
         if (valor > this.getSaldo()) {
             throw new IllegalArgumentException("Saldo insuficiente para o saque");
@@ -43,21 +38,20 @@ public class ContaCorrente {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.SAIDA, new Date(), this);
         operacoes.add(oper);
         this.saldo -= valor;
-        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Saque de " + 
-                      valor + " - " + TipoOperacao.SAIDA);
+        realizados.add("Saque de " + valor + " - " + TipoOperacao.SAIDA);
+
+        setChanged();
+        notifyObservers();
     }
 
-    //Alterado
     public void depositar(double valor) {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this);
         operacoes.add(oper);
         this.saldo += valor;
-        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Depósito de " + 
-                      valor + " - " + TipoOperacao.ENTRADA);
+        realizados.add("Depósito de " + valor + " - " + TipoOperacao.SAIDA);
     }
 
-    
-    //Alterado
+
     public void transferir(double valor, ContaCorrente destino) {
         if (valor > this.getSaldo()) {
             throw new IllegalArgumentException("Saldo insuficiente para transferência");
@@ -66,23 +60,14 @@ public class ContaCorrente {
         Operacao oper = new OperacaoTransferencia(valor, this.getSaldo(), TipoOperacao.SAIDA, new Date(), this, destino);
         operacoes.add(oper);
         this.saldo -= valor;
-        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Transferencia de " + 
-                      valor + " para a Conta " + destino + " - " + TipoOperacao.SAIDA);
+        realizados.add("Transferencia de " + valor + " para a Conta " + destino + " - " + TipoOperacao.SAIDA);
     }
 
-    //Alterado
     private void receberTransferencia(double valor, ContaCorrente origem) {
         Operacao oper = new OperacaoTransferencia(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this, origem);
         operacoes.add(oper);
         this.saldo += valor;
-        realizado.add("Cliente " + this.cliente + ", Conta " + this.numero + ", Transferencia recebida de " + 
-                      origem + " no valor de " + valor + " - " + TipoOperacao.ENTRADA);
-    }
-
-    public int setNotifyMethods(byte methods){
-        if((this.cliente instanceof ClientePessoaFisica) && (methods & JMS) == JMS) return -1;
-        this.methods = methods;
-        return 0;
+        realizados.add("Transferencia recebida de " + origem + " no valor de " + valor + " - " + TipoOperacao.ENTRADA);
     }
 
     public int getNumero() {
@@ -116,5 +101,29 @@ public class ContaCorrente {
     @Override
     public String toString() {
         return this.getChave();
+    }
+
+    public ServicosContaCorrente getServicosContaCorrente() {
+        return servicosContaCorrente;
+    }
+
+    public void aderirBaixaInvestimento(boolean opcao) {
+        this.servicosContaCorrente.setBaixaDeInvestimento(opcao);
+    }
+
+    public void aderirFluxoDeCaixa(boolean opcao) {
+        this.servicosContaCorrente.setFluxoDeCaixa(opcao);
+    }
+
+    public void aderirNotificacoes(boolean opcao) {
+        this.servicosContaCorrente.setNotificacoesEmOperacoes(opcao);
+    }
+
+    public Operacao getUltimaOperacao() {
+        return operacoes.get(operacoes.size() - 1);
+    }
+
+    public String getUltimoRealizado() {
+        return realizados.get(realizados.size() - 1);
     }
 }

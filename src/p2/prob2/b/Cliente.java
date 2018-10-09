@@ -57,6 +57,4 @@ public abstract class Cliente {
     public void setTelFixo(String telFixo) {
         this.telFixo = telFixo;
     }
-
-
 }
