@@ -5,11 +5,8 @@ import org.junit.Test;
 
 public class Teste {
 
-    public Teste() {
-    }
-
-    ContaCorrente contaCorrente1;
-    ContaCorrente contaCorrente2;
+    private ContaCorrente contaCorrente1;
+    private ContaCorrente contaCorrente2;
 
     @Before
     public void setUp() {
@@ -49,8 +46,8 @@ public class Teste {
     }
 
     @Test
-    public void transferencia_UmParaDois() {
+    public void transferencia() {
         contaCorrente1.transferir(500, contaCorrente2);
-        contaCorrente2.transferir(500, contaCorrente2);
+        contaCorrente2.transferir(500, contaCorrente1);
     }
 }

@@ -1,6 +1,5 @@
 package p2.prob2.b;
 
-
 /**
  * @author marcel
  */

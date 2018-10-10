@@ -35,6 +35,7 @@ public class ServicoAnaliseInvestimento implements Observer {
                 System.out.println();
                 System.out.println("Oferta de investimento no valor de " + ultimaOperacao.getValor() / 2 + ". Para mais informações fale com o seu gerente.");
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
             }
         }
     }

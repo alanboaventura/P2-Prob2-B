@@ -1,12 +1,12 @@
 package p2.prob2.b;
 
-
 import java.util.Date;
 
 /**
  * @author marcel
  */
 public class OperacaoTransferencia extends Operacao {
+    
     private ContaCorrente contraPartida;
 
     public OperacaoTransferencia(double valor, double saldoAnterior, TipoOperacao tipo, Date dataHora, ContaCorrente conta, ContaCorrente contraPartida) {

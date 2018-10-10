@@ -35,6 +35,7 @@ public class ServicoOfertaFinanciamento implements Observer {
                 System.out.println();
                 System.out.println("Oferta de financiamento no valor de " + ultimaOperacao.getValor() * 5 + ". Para mais informações fale com o seu gerente.");
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
             }
         }
     }

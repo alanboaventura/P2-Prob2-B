@@ -33,6 +33,7 @@ public class ServicoFluxoCaixa implements Observer {
                 System.out.println();
                 System.out.println("Saldo ATUAL: " + contaCorrente.getSaldo());
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
             }
         }
     }

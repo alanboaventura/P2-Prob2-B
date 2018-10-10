@@ -52,6 +52,7 @@ public class ServicoNotificacoes implements Observer {
                 }
 
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
             }
         }
     }

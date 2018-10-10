@@ -35,6 +35,7 @@ public class ServicoBaixaInvestimento implements Observer {
                 System.out.println();
                 System.out.println("Baixa de investimento no valor de " + ultimaOperacao.getValor());
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
             }
         }
     }

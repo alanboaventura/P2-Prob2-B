@@ -1,5 +1,8 @@
 package p2.prob2.b;
 
+/**
+ * Entidade que representa as configurações referentes ao serviço de notificações.
+ */
 public class ConfiguracoesDeNotificacao {
 
     public ConfiguracoesDeNotificacao(boolean sms, boolean whatsapp, boolean jms) {

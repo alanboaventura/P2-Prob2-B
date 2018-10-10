@@ -1,5 +1,8 @@
 package p2.prob2.b;
 
+/**
+ * Entidade que armazena as configurações referentes a adesão de serviços de uma conta corrente.
+ */
 public class ServicosContaCorrente {
 
     public ServicosContaCorrente(Cliente cliente, boolean baixaDeInvestimento, boolean fluxoDeCaixa, boolean notificacoesEmOperacoes, boolean aceitaSms, boolean aceitaWhatsapp, boolean aceitaJms, boolean analiseInvestimento, boolean ofertaFinanciamento) {
@@ -37,12 +40,12 @@ public class ServicosContaCorrente {
      * Configurações do serviço de notificações.
      */
     private ConfiguracoesDeNotificacao configuracoesDeNotificacao;
-    
+
     /**
      * Se <code>TRUE</code>, a conta corrente em questão aderiu ao serviço "Oferta de financiamento".
      */
     private boolean ofertaFinanciamento;
-    
+
     /**
      * Se <code>TRUE</code>, a conta corrente em questão aderiu ao serviço "Analise de investimento".
      */

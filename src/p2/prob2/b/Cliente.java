@@ -1,12 +1,10 @@
 package p2.prob2.b;
 
-
 /*
  * Esta classe oferece as funcionalidades básicas para atender ao Problema 2.
  */
 
 import java.util.HashMap;
-
 
 /**
  * @author marcel
