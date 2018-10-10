@@ -17,12 +17,12 @@ public class ContaCorrente extends Observable {
     private int agencia;
     private Cliente cliente;
     private double saldo = 0;
-    private List<Operacao> operacoes = new ArrayList();
-    private ArrayList<String> realizados = new ArrayList();
-    private ServicosContaCorrente servicosContaCorrente;
+    private final List<Operacao> operacoes = new ArrayList();
+    private final ArrayList<String> realizados = new ArrayList();
+    private final ServicosContaCorrente servicosContaCorrente;
 
-    public ContaCorrente(Cliente cliente, int numero, int agencia, boolean possuiBaixaDeInvestimento, boolean possuiFluxoDeCaixa, boolean possuiNotificacoesEmOperacoes, boolean aceitaSms, boolean aceitaWhatsapp, boolean aceitaJms) {
-        this.servicosContaCorrente = new ServicosContaCorrente(cliente, possuiBaixaDeInvestimento, possuiFluxoDeCaixa, possuiNotificacoesEmOperacoes, aceitaSms, aceitaWhatsapp, aceitaJms);
+    public ContaCorrente(Cliente cliente, int numero, int agencia, boolean possuiBaixaDeInvestimento, boolean possuiFluxoDeCaixa, boolean possuiNotificacoesEmOperacoes, boolean aceitaSms, boolean aceitaWhatsapp, boolean aceitaJms, boolean possuiAnaliseInvestimento, boolean possuiOfertaFinanciamento) {
+        this.servicosContaCorrente = new ServicosContaCorrente(cliente, possuiBaixaDeInvestimento, possuiFluxoDeCaixa, possuiNotificacoesEmOperacoes, aceitaSms, aceitaWhatsapp, aceitaJms, possuiAnaliseInvestimento, possuiOfertaFinanciamento);
         this.numero = numero;
         this.agencia = agencia;
     }
