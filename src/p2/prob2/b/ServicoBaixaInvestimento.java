@@ -1,5 +1,6 @@
 package p2.prob2.b;
 
+import java.text.DateFormat;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,7 +23,8 @@ public class ServicoBaixaInvestimento implements Observer {
             final String ultimoRealizado = contaCorrente.getUltimoRealizado();
 
             if (servicosContaCorrente.possuiBaixaDeInvestimento() && ultimaOperacao.getTipo() == TipoOperacao.SAIDA) {
-                System.out.println(String.format("[Serviço de baixa de investimento - Conta %s - %s - %s]", contaCorrente.getNumero(), contaCorrente.getCliente().getNome(), ultimaOperacao.getDataHora()));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println(String.format("[Serviço de baixa de investimento - Conta %s - %s - %s]", contaCorrente.getNumero(), contaCorrente.getCliente().getNome(), DateFormat.getDateInstance().format(ultimaOperacao.getDataHora())));
                 System.out.println();
                 System.out.println("Saldo ANTERIOR: " + ultimaOperacao.getSaldoAnterior());
                 System.out.println();
@@ -31,8 +33,8 @@ public class ServicoBaixaInvestimento implements Observer {
                 System.out.println();
                 System.out.println("Saldo ATUAL: " + contaCorrente.getSaldo());
                 System.out.println();
-                System.out.println();
                 System.out.println("Baixa de investimento no valor de " + ultimaOperacao.getValor());
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------");
             }
         }
     }

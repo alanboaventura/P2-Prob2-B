@@ -1,5 +1,6 @@
 package p2.prob2.b;
 
+import java.text.DateFormat;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,7 +23,8 @@ public class ServicoFluxoCaixa implements Observer {
             final String ultimoRealizado = contaCorrente.getUltimoRealizado();
 
             if (servicosContaCorrente.possuiFluxoDeCaixa()) {
-                System.out.println(String.format("[Serviço de analíse de fluxo de caixa - Conta %s - %s - %s]", contaCorrente.getNumero(), contaCorrente.getCliente().getNome(), ultimaOperacao.getDataHora()));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+                System.out.println(String.format("[Serviço de analíse de fluxo de caixa - Conta %s - %s - %s]", contaCorrente.getNumero(), contaCorrente.getCliente().getNome(), DateFormat.getDateInstance().format(ultimaOperacao.getDataHora())));
                 System.out.println();
                 System.out.println("Saldo ANTERIOR: " + ultimaOperacao.getSaldoAnterior());
                 System.out.println();
@@ -30,6 +32,7 @@ public class ServicoFluxoCaixa implements Observer {
                 System.out.println(ultimoRealizado);
                 System.out.println();
                 System.out.println("Saldo ATUAL: " + contaCorrente.getSaldo());
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------");
             }
         }
     }

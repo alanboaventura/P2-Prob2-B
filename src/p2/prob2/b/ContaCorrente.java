@@ -48,7 +48,10 @@ public class ContaCorrente extends Observable {
         Operacao oper = new Operacao(valor, this.getSaldo(), TipoOperacao.ENTRADA, new Date(), this);
         operacoes.add(oper);
         this.saldo += valor;
-        realizados.add("Depósito de " + valor + " - " + TipoOperacao.SAIDA);
+        realizados.add("Depósito de " + valor + " - " + TipoOperacao.ENTRADA);
+
+        setChanged();
+        notifyObservers();
     }
 
 
@@ -61,6 +64,9 @@ public class ContaCorrente extends Observable {
         operacoes.add(oper);
         this.saldo -= valor;
         realizados.add("Transferencia de " + valor + " para a Conta " + destino + " - " + TipoOperacao.SAIDA);
+
+        setChanged();
+        notifyObservers();
     }
 
     private void receberTransferencia(double valor, ContaCorrente origem) {
@@ -68,6 +74,9 @@ public class ContaCorrente extends Observable {
         operacoes.add(oper);
         this.saldo += valor;
         realizados.add("Transferencia recebida de " + origem + " no valor de " + valor + " - " + TipoOperacao.ENTRADA);
+
+        setChanged();
+        notifyObservers();
     }
 
     public int getNumero() {
