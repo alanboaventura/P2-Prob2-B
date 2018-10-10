@@ -1,0 +1,12 @@
+Problema 2 - Grupo B
+
+Alan Boaventura
+Eduardo Cesar Pasquali
+Maik Henrique Carminati
+Rafael Froeschlin Filho
+
+Mapeamento
+
+Observer: ContaCorrente.java
+
+Subject: São os serviços, ServicoAnaliseInvestimento.java, OperacaoTransferencia.java, ServicoNotificacoes.java, ServicoFluxoCaixa.java, ServicoBaixaInvestimento.java.
