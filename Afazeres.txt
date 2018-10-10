@@ -1,6 +1,0 @@
-﻿1) Criar uma estrutura para salvar quais serviços uma determinada conta aderiu. = Maik
-2) Configurações referentes ao serviço de notificações (PF ou PJ). = Rafael
-	Se é PF: se é SMS, WPP ou os dois.
-	Se é PJ: JMS.
-3) Implementação dos três serviços e a questão (Classes separadas, sysout com as informações) de comunicação entre as operações e os serviços (Padrão Observer). = Alan
-4) Criação dos testes unitários validando as operações. = Edu
