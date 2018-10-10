@@ -25,7 +25,7 @@ public class ServicoNotificacoes implements Observer {
                 final Cliente cliente = contaCorrente.getCliente();
 
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-                System.out.println(String.format("[Serviço de notificações - Conta %s - %s - %s]", contaCorrente.getNumero(), cliente.getNome(), DateFormat.getDateInstance().format(ultimaOperacao.getDataHora())));
+                System.out.println(String.format("[Serviço de notificações - Conta %s - %s - %s]", contaCorrente.getChave(), cliente.getNome(), DateFormat.getDateInstance().format(ultimaOperacao.getDataHora())));
                 System.out.println();
                 System.out.println("Saldo ANTERIOR: " + ultimaOperacao.getSaldoAnterior());
                 System.out.println();

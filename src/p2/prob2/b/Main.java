@@ -9,7 +9,7 @@ public class Main {
         ContaCorrente contaCorrente1 = new ContaCorrente(clientePessoaFisica, 3331, 22578, true, true, true, true, true, false);
         clientePessoaFisica.addConta(contaCorrente1);
         ContaCorrente contaCorrente2 = new ContaCorrente(clientePessoaJuridica, 3565, 22388, true, true, true, true, true, true);
-        clientePessoaFisica.addConta(contaCorrente2);
+        clientePessoaJuridica.addConta(contaCorrente2);
 
         ServicoBaixaInvestimento servicoBaixaInvestimento1 = new ServicoBaixaInvestimento(contaCorrente1);
         ServicoFluxoCaixa servicoFluxoCaixa1 = new ServicoFluxoCaixa(contaCorrente1);
