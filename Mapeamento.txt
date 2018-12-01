@@ -9,4 +9,11 @@ Mapeamento
 
 Observer: ContaCorrente.java
 
-Subject: S�o os servi�os, ServicoAnaliseInvestimento.java, OperacaoTransferencia.java, ServicoNotificacoes.java, ServicoFluxoCaixa.java, ServicoBaixaInvestimento.java.
+Subject: São os serviços, ServicoAnaliseInvestimento.java, OperacaoTransferencia.java, ServicoNotificacoes.java, ServicoFluxoCaixa.java, ServicoBaixaInvestimento.java.
+
++-*+-*+-*+-*+-*+-*+-*+-*
+Observações do Professor:
+- o padrão Observer é o contrário do que foi indicado no mapeamento: a classe ContaCorrente é observada (Subject) pelos serviços. Quando ocorre alguma operação na ContaCorrente, os observadores têm interesse e realizam sua ação.
+- a implementação está correta.
+
+Nota (0-3):2,8
